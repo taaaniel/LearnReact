@@ -49,35 +49,66 @@
             name="Rick"
             department="QA"
           />
+          <Count />
         </ul>
       )
     }
 
     class ContactItem extends React.Component {
-  render() {
-    const { login, name, department } = this.props;
-    const imgUrl = `https://api.adorable.io/avatars/55/${login}.png`;
-    return (
-      <li className="item">
-        <img src={imgUrl} className="ui mini rounded image" />
-        <div className="content">
-          <h4 className="header">{name}</h4>
-          <div className="description">{department}</div>
-        </div>
-      </li>
-    );
-  }
-}
-      function App() {
+      render() {
+        const { login, name, department } = this.props;
+        const imgUrl = `https://api.adorable.io/avatars/55/${login}.png`;
         return (
+          <li className="item">
+            <img src={imgUrl} className="ui mini rounded image" />
+            <div className="content">
+              <h4 className="header">{name}</h4>
+              <div className="description">{department}</div>
+            </div>
+          </li>
+        );
+      }
+    }
+    function App() {
+      return (
+        <div>
+          <Header />
+          <main className="ui main text container">
+            <ContactsList />
+          </main>
+        </div>
+      );
+    }
+
+    class Count extends React.Component {
+
+      constructor() {
+        super();
+        this.state = {counter: 0};
+      }
+
+      increment() {
+        this.setState ({
+          counter: this.state.counter + 1
+        })
+      }
+
+      decrement() {
+        this.setState ({
+          counter: this.state.counter - 1
+        })
+      }
+
+      render () {
+        return ( 
           <div>
-           <Header />
-            <main className="ui main text container">
-              <ContactsList />
-            </main>
+            <button onClick={this.increment.bind(this)}>+</button>
+            <output>{this.state.counter}</output>
+            <button onClick={this.decrement.bind(this)}>-</button>
           </div>
         );
       }
+    }
         ReactDOM.render(
           <App />,
           document.getElementById('app')
